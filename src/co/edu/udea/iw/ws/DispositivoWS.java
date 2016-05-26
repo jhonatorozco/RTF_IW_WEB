@@ -147,20 +147,4 @@ public class DispositivoWS {
 		return dispositivos;
 	}
 	
-	/**
-	 * Permite obtener todos los dispositivos que no han sido 
-	 * solicitados por los usuarios
-	 * @return
-	 * @throws DaoException
-	 */
-	//http://localhost:8081/RTF_IW_Web/rest/dispositivo/disponibles
-	@Path("dispo")
-	@Produces(MediaType.APPLICATION_JSON)
-	@GET
-	public List<Dispositivo> mostrarDispositivo(){
-		List<Dispositivo> dispositivos = new ArrayList<>();
-		
-		return dispositivos;
-	}
-	
 }
