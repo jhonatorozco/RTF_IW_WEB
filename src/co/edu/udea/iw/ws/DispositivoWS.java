@@ -8,6 +8,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -25,7 +26,8 @@ import co.edu.udea.iw.service.SolicitudService;
 /**
  * Expone los servicios de manera web para la entidad dispositivo
  * @author Yoiner Gomez yoiner.gomez22@gmail.com
- *
+ * @version 1
+ * @category WS
  */
 @Path("dispositivo")
 @Component
@@ -118,6 +120,24 @@ public class DispositivoWS {
 	}
 	
 	/**
+	 * Permite obtener el detalle de un dispositivo
+	 * @param codigo
+	 * @return
+	 * @throws ServiceException
+	 * @throws DaoException
+	 */
+	//http://localhost:8081/RTF_IW_Web/rest/dispositivo/111
+	@Path("{codigo}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	public Dispositivo obtenerDispositivo(@PathParam("codigo") int codigo) 
+			throws ServiceException, DaoException{
+		Dispositivo dispositivo = new Dispositivo();
+		dispositivo = dispositivoService.buscarDispositivo(codigo);
+		return dispositivo;
+	}
+	
+	/**
 	 * Permite obtener todos los dispositivos que no han sido 
 	 * solicitados por los usuarios
 	 * @return
@@ -128,7 +148,7 @@ public class DispositivoWS {
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	public List<Dispositivo> mostrarDispositivosDisponibles() throws DaoException{
-		List<Dispositivo> dispositivos = null;
+		List<Dispositivo> dispositivos = new ArrayList<>();
 		dispositivos = solicitudService.obtenerDispositivosDisponibles();
 		return dispositivos;
 	}
