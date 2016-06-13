@@ -1,0 +1,23 @@
+<!-- codigo html del formulario para el ingreso de un cliente -->
+<div>
+<!-- 	Cuando el formulario hace submit llama el metodo guardar del controlador -->
+	<form ng-submit="guardar()">
+		<div>
+			<label>Cédula</label>
+			<input type="text" placeholder="Cédula de ciudadanía" required ng-model="cliente.cedula">
+		</div>
+		<div>
+			<label>Nombre</label>
+			<input type="text" placeholder="Nombre" required ng-model="cliente.nombre">
+		</div>
+		<div>
+			<label>Apellidos</label>
+			<input type="text" placeholder="Apellidos" required ng-model="cliente.apellidos">
+		</div>
+		<div>
+			<label>Correo electrónico</label>
+			<input type="email" placeholder="Correo electrónico" required ng-model="cliente.email">
+		</div>
+		<button type="submit">Guardar</button>
+	</form>
+</div>
