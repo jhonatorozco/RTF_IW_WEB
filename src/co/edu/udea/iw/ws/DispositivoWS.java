@@ -49,17 +49,17 @@ public class DispositivoWS {
 	 * @param caracteristica
 	 * @return
 	 */
-	//http://localhost:8081/RTF_IW_Web/rest/dispositivo/insertar/212/Tablet/Lenovo/Nuevo
-	//http://localhost:8082/RTF_IW_Web/rest/dispositivo/insertar?codigo=212&nombre=Tablet&marca=Lenovo&caracteristica=Nuevo
-	@Path("insertar/{codigo}/{nombre}/{marca}/{caracteristica}")
-	//@Path("insertar")
+
+	//http://localhost:8081/RTF_IW_Web/rest/dispositivo/insertar?codigo=212&nombre=Tablet&marca=Lenovo&caracteristica=Nuevo
+	//@Path("insertar/{codigo}/{nombre}/{marca}/{caracteristica}")
+	@Path("insertar")
 	@Produces(MediaType.TEXT_PLAIN)
 	@POST
 	public String guardar(
-			@PathParam("codigo") Integer codigo,
-			@PathParam("nombre") String nombre,
-			@PathParam("marca") String marca,
-			@PathParam("caracteristica") String caracteristica) {
+			@QueryParam("codigo") Integer codigo,
+			@QueryParam("nombre") String nombre,
+			@QueryParam("marca") String marca,
+			@QueryParam("caracteristica") String caracteristica) {
 	
 		try{	
 			dispositivoService.guardarDispositivo(codigo, nombre, marca, caracteristica);
@@ -80,6 +80,7 @@ public class DispositivoWS {
 	 * @return
 	 */
 	//http://localhost:8082/RTF_IW_Web/rest/dispositivo/modificar?codigo=212&nombre=Tablet&marca=Lenovo&caracteristica=Nuevo
+
 	@Path("modificar")
 	@Produces(MediaType.TEXT_PLAIN)
 	@PUT
@@ -143,6 +144,7 @@ public class DispositivoWS {
 	 * @return
 	 * @throws DaoException
 	 */
+
 	//http://localhost:8082/RTF_IW_Web/rest/dispositivo/disponibles
 	@Path("disponibles")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -159,6 +161,7 @@ public class DispositivoWS {
 	 * @throws DaoException
 	 */
 	//http://localhost:8082/RTF_IW_Web/rest/dispositivo
+
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	public List<Dispositivo> mostrarTodosDispositivos() throws DaoException{
