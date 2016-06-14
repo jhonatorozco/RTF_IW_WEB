@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Insert title here</title>
+<script src="../resources/js/angular.min.js"></script>
+<script src="../resources/js/angular-route.js"></script>
+<script src="../resources/js/solicitud.js"></script>
+</head>
+<body ng-app="solicitudApp">
+<div ng-controller="crearClienteControlador">
+	<form ng-submit="guardar()">
+		<div>
+			<label>Dispositivo</label>
+			<select name="selectDispositivo" id="selectDispositivo"
+      		ng-options="d.nombre for d in dispositivos"
+      		ng-model="solicitud.dispositivoSeleccionado"></select>
+      				<h1>You selected: {{solicitud.dispositivoSeleccionado.nombre}}</h1>
+					<p>Caracteristicas: {{solicitud.dispositivoSeleccionado.caracteristicas}}</p>
+		</div>		
+		<div>
+			<label>correo</label>
+			<input type="text" ng-model="solicitud.correo"/>
+		</div>
+		<div>
+			<label>Fecha inicio:</label>
+			<input type="datetime" id="fechaInicio" name="fechaInicio" ng-model="solicitud.fechaInicio"
+       		placeholder="dd-MM-yyyy HH:mm:ss" required="required" />
+		</div>
+		<div>
+			<label>Fecha fin:</label>
+			<input type="datetime" id="fechaFin" name="fechaFin" ng-model="solicitud.fechaFin"
+       		placeholder="dd-M-yyyy HH:mm:ss" required="required" />
+		</div>
+		<div>	
+			<label>Motivo</label>
+			<input type="text" ng-model="solicitud.motivo"/>
+		</div>	
+
+	
+		<input type="submit" value="Guardar"/>
+		
+	</form>
+</div>
+</body>
+</html>
