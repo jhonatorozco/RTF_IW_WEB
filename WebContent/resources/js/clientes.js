@@ -1,10 +1,14 @@
 
-var appClientes = angular.module('Clientes', [ 'ngRoute', 'ngCookies' ]);
-
-var URL_SERVICIO = 'http://localhost:8081/RTF_IW_Web/';
+var appClientes = angular.module('solicitudApp', [ 'ngRoute', 'ngCookies' ]);
+var URL_SERVICIO = 'http://localhost:8082/RTF_IW_Web/';
 var URL_SERVICIO_VALIDAR_USUARIO = URL_SERVICIO+'rest/usuario/autenticarUsuario';
 var URL_SERVICIO_LISTA = URL_SERVICIO+'rest/Cliente';
 var URL_SERVICIO_GUARDAR = URL_SERVICIO+'rest/Cliente';
+var servicioListaDispositivos ="http://localhost:8082/RTF_IW_Web/rest/dispositivo";
+var serviciocrearSolicitud= "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
+var toType = function(obj) {
+	  return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
+	}
 
 appClientes.factory('auth', function($cookies,$location){
     return{
@@ -15,7 +19,7 @@ appClientes.factory('auth', function($cookies,$location){
     		 console.log('Creando cookie');
              $cookies.nombreUsuario = usuario,
              //mandamos a la lista de clientes
-             $location.url('/listaClientes'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar despues de loguearse
+             $location.url('/creacionSolicitud'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar despues de loguearse
          },
         
         validarEstado : function(){
@@ -26,12 +30,31 @@ appClientes.factory('auth', function($cookies,$location){
             //en el caso de que intente acceder al login y ya haya iniciado sesi�n lo mandamos a 
             //la lista de clientes
             if(typeof($cookies.nombreUsuario) != 'undefined' && $location.url() == '/'){
-                $location.url('/listaClientes'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar usuario TROLL
+                $location.url('/creacionSolicitud'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar usuario TROLL
             }
         }
     };
 });
 
+appClientes.service('dispositivoService', function($http){
+	this.listaDispositivos = function(){
+		return $http ({
+			method: 'GET',
+			url:servicioListaDispositivos});
+	}
+		
+});
+
+
+appClientes.service('solicitudService', function($http){
+	this.crearSolicitud = function(solicitud,usuario){
+		return $http ({
+			method: 'POST',
+			url:serviciocrearSolicitud+"/"+ usuario +"/"+solicitud.dispositivoSeleccionado.codigo
+			+ "/"+solicitud.fechaInicio.toString() + "/" +solicitud.fechaFin.toString() +"/"+solicitud.motivo});
+	}
+		
+});
 
 appClientes.service('Usuarios', function($http) {
 	// Llama el servicio web para validar el usuario y la contrase�a
@@ -100,8 +123,51 @@ appClientes.config([ '$routeProvider', function($routeProvider) {
 		// un cliente
 		controller : 'contCliente'
 	});
+	
+	$routeProvider.when('/creacionSolicitud', {
+		templateUrl : 'creacionSolicitud.html', // Cuando se carga la raiz del
+		// aplicativo se carga en la vista
+		// la lista de clientes
+		controller : 'crearClienteControlador'
+	});
 } 
 ]);
+
+appClientes.controller('crearClienteControlador',function($scope, $location, $cookies,dispositivoService,solicitudService){
+	dispositivoService.listaDispositivos().success(function(data){
+		
+		
+		$scope.dispositivos = data.dispositivo;
+		
+		if(toType($scope.dispositivos)=='array'){
+			
+		}else if(toType($scope.dispositivos)=='object'){
+			
+		}
+		
+	});
+	
+	$scope.solicitud = {
+			dispositivoSeleccionado:'',
+			correo : '',
+			fechaInicio :new Date(2010, 11, 28, 14, 57),
+			fechaFin : new Date(2010, 11, 28, 14, 57),
+			motivo : ''
+			
+		};
+
+		$scope.guardar = function() {
+			
+			solicitudService.crearSolicitud($scope.solicitud,$cookies.nombreUsuario).success(function(data) {
+				alert(data);
+			});
+
+		};
+
+	
+});
+
+
 
 
 //Controlador para manejar el formulario de autenticaci�n
@@ -155,7 +221,7 @@ appClientes.controller('contCliente', function($scope, $location, $cookies, Clie
 	$scope.guardar = function() {
 		
 		Clientes.guardar($scope.cliente, $cookies.nombreUsuario).success(function(data) {
-			$location.url('/listaClientes');
+			$location.url('/creacionSolicitud');
 		});
 
 	};
@@ -173,5 +239,4 @@ appClientes.run(function($rootScope, auth){
         auth.validarEstado();
     });
 });
-
 
