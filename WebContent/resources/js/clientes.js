@@ -1,9 +1,10 @@
 
 var appClientes = angular.module('Clientes', [ 'ngRoute', 'ngCookies' ]);
 
-var URL_SERVICIO_VALIDAR_USUARIO = 'http://localhost:8081/RTF_IW_Web/rest/usuario/autenticarUsuario';
-var URL_SERVICIO_LISTA = 'http://localhost:8075/WSEjemplo/rest/Cliente';
-var URL_SERVICIO_GUARDAR = 'http://localhost:8075/WSEjemplo/rest/Cliente';
+var URL_SERVICIO = 'http://localhost:8081/RTF_IW_Web/';
+var URL_SERVICIO_VALIDAR_USUARIO = URL_SERVICIO+'rest/usuario/autenticarUsuario';
+var URL_SERVICIO_LISTA = URL_SERVICIO+'rest/Cliente';
+var URL_SERVICIO_GUARDAR = URL_SERVICIO+'rest/Cliente';
 
 appClientes.factory('auth', function($cookies,$location){
     return{
