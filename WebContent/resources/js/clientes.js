@@ -115,6 +115,13 @@ appClientes.config([ '$routeProvider', function($routeProvider) {
 		// la lista de clientes
 		controller : 'solicitudControlador'
 	});
+	
+	$routeProvider.when('/administrar', {
+		templateUrl : 'solicitudAdmin.html', // Cuando se carga la raiz del
+		// aplicativo se carga en la vista
+		// la lista de clientes
+		controller : 'solicitudControladorAdmin'
+	});
 } ]);
 
 // Controlador para manejar el formulario de autenticaci�n
