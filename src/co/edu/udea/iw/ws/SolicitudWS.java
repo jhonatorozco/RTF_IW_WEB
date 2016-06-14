@@ -193,4 +193,5 @@ public class SolicitudWS {
 			}
 			return solicitudDTOWS;
 		}
+
 }
