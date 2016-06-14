@@ -36,25 +36,6 @@ appClientes.factory('auth', function($cookies,$location){
     };
 });
 
-appClientes.service('dispositivoService', function($http){
-	this.listaDispositivos = function(){
-		return $http ({
-			method: 'GET',
-			url:servicioListaDispositivos});
-	}
-		
-});
-
-
-appClientes.service('solicitudService', function($http){
-	this.crearSolicitud = function(solicitud,usuario){
-		return $http ({
-			method: 'POST',
-			url:serviciocrearSolicitud+"/"+ usuario +"/"+solicitud.dispositivoSeleccionado.codigo
-			+ "/"+solicitud.fechaInicio.toString() + "/" +solicitud.fechaFin.toString() +"/"+solicitud.motivo});
-	}
-		
-});
 
 appClientes.service('Usuarios', function($http) {
 	// Llama el servicio web para validar el usuario y la contrase�a
@@ -128,46 +109,10 @@ appClientes.config([ '$routeProvider', function($routeProvider) {
 		templateUrl : 'creacionSolicitud.html', // Cuando se carga la raiz del
 		// aplicativo se carga en la vista
 		// la lista de clientes
-		controller : 'crearClienteControlador'
+		controller : 'solicitudControlador'
 	});
 } 
 ]);
-
-appClientes.controller('crearClienteControlador',function($scope, $location, $cookies,dispositivoService,solicitudService){
-	dispositivoService.listaDispositivos().success(function(data){
-		
-		
-		$scope.dispositivos = data.dispositivo;
-		
-		if(toType($scope.dispositivos)=='array'){
-			
-		}else if(toType($scope.dispositivos)=='object'){
-			
-		}
-		
-	});
-	
-	$scope.solicitud = {
-			dispositivoSeleccionado:'',
-			correo : '',
-			fechaInicio :new Date(2010, 11, 28, 14, 57),
-			fechaFin : new Date(2010, 11, 28, 14, 57),
-			motivo : ''
-			
-		};
-
-		$scope.guardar = function() {
-			
-			solicitudService.crearSolicitud($scope.solicitud,$cookies.nombreUsuario).success(function(data) {
-				alert(data);
-			});
-
-		};
-
-	
-});
-
-
 
 
 //Controlador para manejar el formulario de autenticaci�n
