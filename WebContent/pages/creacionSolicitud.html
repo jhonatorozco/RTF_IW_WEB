@@ -1,8 +1,8 @@
-<div>
+<div ng-controller="crearClienteControlador" class="container">
 	<form ng-submit="guardar()">
 		<div>
 			<label>Dispositivo</label>
-			<select name="selectDispositivo" id="selectDispositivo"
+			<select name="selectDispositivo" id="selectDispositivo" class="browser-default"
       		ng-options="d.nombre for d in dispositivos"
       		ng-model="solicitud.dispositivoSeleccionado"></select>
       				<p>Tu escogiste: {{solicitud.dispositivoSeleccionado.nombre}}</p>

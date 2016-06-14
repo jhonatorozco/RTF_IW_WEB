@@ -1,6 +1,6 @@
-var appClientes = angular.module('solicitudApp', [ 'ngRoute', 'ngCookies' ]);
-var servicioListaDispositivos ="http://localhost:8082/RTF_IW_Web/rest/dispositivo";
-var serviciocrearSolicitud= "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
+var appClientes = angular.module('solicitudApp');
+var servicioListaDispositivos ="http://localhost:8081/RTF_IW_Web/rest/dispositivo";
+var serviciocrearSolicitud= "http://localhost:8081/RTF_IW_Web/rest/solicitud/crearSolicitud";
 appClientes.controller('crearClienteControlador',function($scope, $location, $cookies,dispositivoService,solicitudService){
 	dispositivoService.listaDispositivos().success(function(data){
 		$scope.dispositivos = data.dispositivo;

@@ -1,11 +1,11 @@
 
 var appClientes = angular.module('solicitudApp', [ 'ngRoute', 'ngCookies' ]);
-var URL_SERVICIO = 'http://localhost:8082/RTF_IW_Web/';
+var URL_SERVICIO = 'http://localhost:8081/RTF_IW_Web/';
 var URL_SERVICIO_VALIDAR_USUARIO = URL_SERVICIO+'rest/usuario/autenticarUsuario';
 var URL_SERVICIO_LISTA = URL_SERVICIO+'rest/Cliente';
 var URL_SERVICIO_GUARDAR = URL_SERVICIO+'rest/Cliente';
-var servicioListaDispositivos ="http://localhost:8082/RTF_IW_Web/rest/dispositivo";
-var serviciocrearSolicitud= "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
+var servicioListaDispositivos ="http://localhost:8081/RTF_IW_Web/rest/dispositivo";
+var serviciocrearSolicitud= "http://localhost:8081/RTF_IW_Web/rest/solicitud/crearSolicitud";
 var toType = function(obj) {
 	  return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
 	}
