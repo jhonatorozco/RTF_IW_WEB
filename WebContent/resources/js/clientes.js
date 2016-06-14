@@ -1,7 +1,7 @@
 
 var appClientes = angular.module('Clientes', [ 'ngRoute', 'ngCookies' ]);
 
-var URL_SERVICIO_VALIDAR_USUARIO = 'http://localhost:8075/WSEjemplo/rest/Usuario';
+var URL_SERVICIO_VALIDAR_USUARIO = 'http://localhost:8081/RTF_IW_Web/rest/usuario/autenticarUsuario';
 var URL_SERVICIO_LISTA = 'http://localhost:8075/WSEjemplo/rest/Cliente';
 var URL_SERVICIO_GUARDAR = 'http://localhost:8075/WSEjemplo/rest/Cliente';
 
@@ -11,9 +11,10 @@ appClientes.factory('auth', function($cookies,$location){
     	 login : function(usuario)
          {
              //creamos la cookie con el nombre que nos han pasado
+    		 console.log('Creando cookie');
              $cookies.nombreUsuario = usuario,
              //mandamos a la lista de clientes
-             $location.url('/listaClientes');
+             $location.url('/listaClientes'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar despues de loguearse
          },
         
         validarEstado : function(){
@@ -21,10 +22,10 @@ appClientes.factory('auth', function($cookies,$location){
             if(typeof($cookies.nombreUsuario) == 'undefined'){
                 $location.url('/');
             }
-            //en el caso de que intente acceder al login y ya haya iniciado sesión lo mandamos a 
+            //en el caso de que intente acceder al login y ya haya iniciado sesiï¿½n lo mandamos a 
             //la lista de clientes
             if(typeof($cookies.nombreUsuario) != 'undefined' && $location.url() == '/'){
-                $location.url('/listaClientes');
+                $location.url('/listaClientes'); //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Redireccionar usuario TROLL
             }
         }
     };
@@ -32,15 +33,11 @@ appClientes.factory('auth', function($cookies,$location){
 
 
 appClientes.service('Usuarios', function($http) {
-	// Llama el servicio web para validar el usuario y la contraseña
+	// Llama el servicio web para validar el usuario y la contraseï¿½a
 	this.validar = function(usuario, contrasena) {
 		return $http({
-			method : 'GET',
-			url : URL_SERVICIO_VALIDAR_USUARIO,
-			params : {
-				login : usuario,
-				clave : contrasena
-			}
+			method : 'POST',
+			url : URL_SERVICIO_VALIDAR_USUARIO+'/'+usuario+'/'+contrasena,
 		});
 	};
 
@@ -106,21 +103,22 @@ appClientes.config([ '$routeProvider', function($routeProvider) {
 ]);
 
 
-//Controlador para manejar el formulario de autenticación
+//Controlador para manejar el formulario de autenticaciï¿½n
 appClientes.controller('contLogin', function($scope,auth, Usuarios) {
-		    //la función login que llamamos en la vista llama a la función
+		    //la funciï¿½n login que llamamos en la vista llama a la funciï¿½n
 		    //login de la factoria auth pasando lo que contiene el campo
 		    //de texto del formulario
 		    $scope.login = function(){
 		    	
 		    	Usuarios.validar($scope.nombreUsuario, $scope.pws).success(function(data){
-		    		if(data != ''){
+		    		console.log(data);
+		    		if(data == 'el cliente no existe'){
 		    			alert(data);
 		    			$scope.nombreUsuario = '';
 		    			$scope.pws = '';
 		    			return;
-		    		}else{
-		    		
+		    		}else if(data=='el cliente se autentico de forma exitosa'){
+		    			alert(data);
 		    			auth.login($scope.nombreUsuario);
 		    		}
 		    	});
@@ -170,7 +168,7 @@ appClientes.run(function($rootScope, auth){
     $rootScope.$on('$routeChangeStart', function()
     {
         //llamamos a checkStatus, el cual lo hemos definido en la factoria auth
-        //la cuál hemos inyectado en la acción run de la aplicación
+        //la cuï¿½l hemos inyectado en la acciï¿½n run de la aplicaciï¿½n
         auth.validarEstado();
     });
 });
