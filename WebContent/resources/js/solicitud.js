@@ -5,7 +5,7 @@ var servicioSolicitudUsuario= URL_SERVICIO + "rest/solicitud/obtenerSolicitudesU
 var servicioObtenerSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitudesUsuario/";
 var servicioObtenerTodasSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitud";
 var servicioRechazarSolicitud = URL_SERVICIO + "rest/solicitud/actualizarEstadoSolicitud/";
-appClientes.controller('solicitudControlador',function($scope, $location, $cookies,dispositivoService,solicitudService){
+appClientes.controller('solicitudControlador',function($scope, $location,$route, $cookies,dispositivoService,solicitudService){
 	dispositivoService.listaDispositivos().success(function(data){
 
 		$scope.dispositivos = data.dispositivo;
@@ -29,7 +29,8 @@ appClientes.controller('solicitudControlador',function($scope, $location, $cooki
 	$scope.guardar = function() {
 		solicitudService.crearSolicitud($scope.solicitud,
 				$cookies.nombreUsuario).success(function(data) {
-					$location.reload();
+					//$location.reload();
+					$route.reload();
 					alert(data);
 			
 		});
