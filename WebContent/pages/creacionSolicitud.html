@@ -1,8 +1,8 @@
-<div>
+<div class="container">
 	<form ng-submit="guardar()">
 		<div>
 			<label>Dispositivo</label>
-			<select name="selectDispositivo" id="selectDispositivo"
+			<select name="selectDispositivo" id="selectDispositivo" class="browser-default"
       		ng-options="d.nombre for d in dispositivos"
       		ng-model="solicitud.dispositivoSeleccionado"></select>
       				<p>Tu escogiste: {{solicitud.dispositivoSeleccionado.nombre}}</p>
@@ -25,21 +25,25 @@
 
 	
 		<input type="submit" value="Guardar"/>
+			<div>
+		<table class="highlight">
+	        <thead>
+	          <tr>
+	              <th data-field="nombre">Dispositivo solicitado</th>
+	              <th data-field="inicio">Fecha inicio</th>
+	              <th data-field="fin">Fecha fin</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr ng-repeat="solicitud in solicitudes">
+	            <td>{{solicitud.id.dispositivo.nombre}}</td>
+	            <td>{{solicitud.id.fechaInicio}}</td>
+	            <td>{{solicitud.id.fechaFin}}</td>
+	          </tr>
+	        </tbody>
+    	</table>
+	</div>
 		
 	</form>
-	
-	<div>
-	<table border="1" width="100%">
-		<tr>
-			<th height="20%">Dispositivo solicitado</th>
-			<th height="35%">Fecha Inicio</th>
-			<th height="35%">Fecha Fin</th>
-		</tr>
-		<tr ng-repeat="s in solicitudes">
-			<td>{{s.id.dispositivo.nombre}}</td>
-			<td>{{s.id.fechaInicio}}</td>
-			<td>{{s.id.fechaFin}</td>
-		</tr>
-	</table>
-	</div>
+
 </div>

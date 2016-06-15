@@ -109,6 +109,32 @@ public class SolicitudWS {
 		}
 		
 		/**
+		 * Es el servicio web que permite obtener todas las solicitudes
+		 * asociadas a un usuario, para ello se retorna una lista con objetos
+		 * de la clase SolicitudDTOWS que se basa en el DTO Solicitud. La respuesta
+		 * se produce en formato json
+		 * @param correo
+		 * @return
+		 */
+		@Path("obtenerSolicitud")
+		@Produces(MediaType.APPLICATION_JSON)
+		@GET
+		public List<SolicitudDTOWS> obtenerSolicitudes(){
+				List<SolicitudDTOWS> lista=new ArrayList<SolicitudDTOWS>();
+				try{
+					for(Solicitud solicitud: solicitudService.getSolicitudDAO().obtenerTodas()){
+						SolicitudDTOWS solicitudDTOWS=new SolicitudDTOWS();
+						solicitudDTOWS.setId(solicitud.getId());
+						solicitudDTOWS.setEstadoSolicitud(solicitud.getEstadoSolicitud());
+						lista.add(solicitudDTOWS);
+					}
+				}catch(DaoException e){
+					throw new RemoteException(e);
+				}
+				return lista;
+		}
+		
+		/**
 		 * Servicio web que permite actualizar el estado de una solicitud. Se retorna un
 		 * json con la solicitud que fue exitosamente modificada.
 		 * @param empCorreo
