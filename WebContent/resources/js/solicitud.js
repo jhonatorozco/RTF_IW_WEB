@@ -1,10 +1,10 @@
 var appClientes = angular.module('solicitudApp');
-var servicioListaDispositivos ="http://localhost:8082/RTF_IW_Web/rest/dispositivo";
-var serviciocrearSolicitud= "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
-var servicioSolicitudUsuario= "http://localhost:8082/RTF_IW_Web/rest/solicitud/obtenerSolicitudesUsuario";
-var servicioObtenerSolicitudes = "http://localhost:8082/RTF_IW_Web/rest/solicitud/obtenerSolicitudesUsuario/";
-var servicioObtenerTodasSolicitudes = "http://localhost:8082/RTF_IW_Web/rest/solicitud/obtenerSolicitud";
-var servicioRechazarSolicitud = "http://localhost:8082/RTF_IW_Web/rest/solicitud/actualizarEstadoSolicitud/";
+var servicioListaDispositivos =URL_SERVICIO + "rest/dispositivo";
+var serviciocrearSolicitud= URL_SERVICIO + "rest/solicitud/crearSolicitud";
+var servicioSolicitudUsuario= URL_SERVICIO + "rest/solicitud/obtenerSolicitudesUsuario";
+var servicioObtenerSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitudesUsuario/";
+var servicioObtenerTodasSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitud";
+var servicioRechazarSolicitud = URL_SERVICIO + "rest/solicitud/actualizarEstadoSolicitud/";
 appClientes.controller('solicitudControlador',function($scope, $location, $cookies,dispositivoService,solicitudService){
 	dispositivoService.listaDispositivos().success(function(data){
 

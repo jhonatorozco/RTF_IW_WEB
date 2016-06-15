@@ -1,11 +1,11 @@
 var appClientes = angular.module('solicitudApp', [ 'ngRoute', 'ngCookies' ]);
-var URL_SERVICIO = 'http://localhost:8082/RTF_IW_Web/';
+var URL_SERVICIO = 'http://localhost:8081/RTF_IW_Web/';
 var URL_SERVICIO_VALIDAR_USUARIO = URL_SERVICIO
 		+ 'rest/usuario/autenticarUsuario';
 var URL_SERVICIO_LISTA = URL_SERVICIO + 'rest/Cliente';
 var URL_SERVICIO_GUARDAR = URL_SERVICIO + 'rest/Cliente';
-var servicioListaDispositivos = "http://localhost:8082/RTF_IW_Web/rest/dispositivo";
-var serviciocrearSolicitud = "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
+var servicioListaDispositivos = URL_SERVICIO + "rest/dispositivo";
+var serviciocrearSolicitud = URL_SERVICIO + "rest/solicitud/crearSolicitud";
 
 var toType = function(obj) {
 	return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
@@ -19,7 +19,7 @@ appClientes.factory('auth', function($cookies, $location) {
 			console.log('Creando cookie');
 			$cookies.nombreUsuario = usuario,
 			// mandamos a la lista de clientes
-			$window.location.url('/creacionSolicitud'); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			$location.url('/creacionSolicitud'); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 													// Redireccionar despues de
 													// loguearse
 		},
@@ -145,8 +145,7 @@ appClientes.controller('contLogin',function($scope, auth, Usuarios) {
 												return;
 											} else if (data == 'el cliente se autentico de forma exitosa') {
 												alert(data);
-												auth
-														.login($scope.nombreUsuario);
+												auth.login($scope.nombreUsuario);
 											}
 										});
 					};
