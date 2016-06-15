@@ -69,8 +69,11 @@ appClientes.controller('solicitudControladorAdmin',function($scope, $location, $
 
 	});
 	
-	rechazarSolicitud = function(solicitud){
-		solicitud;
+	$scope.rechazarSolicitud = function(solicitud){
+		solicitudService.rechazarSolicitud($cookies.nombreUsuario, solicitud).success(function(data){
+			console.log("La solicitud fue modificada");
+			
+		});
 	}
 });
 
@@ -99,4 +102,13 @@ appClientes.service('solicitudService', function($http){
 			method: 'GET',
 			url:servicioObtenerTodasSolicitudes});
 	} 
+	
+	this.rechazarSolicitud= function(empleado, solicitud){
+		return $http ({
+			method: 'PUT',
+			url: servicioRechazarSolicitud+empleado+"/"+0+"/"+solicitud.id.usuario.correo+
+			"/"+solicitud.id.dispositivo.codigo+"/"+solicitud.id.fechaInicio.toString()+"/"+solicitud.id.fechaFin.toString()
+			});
+		
+	}
 });

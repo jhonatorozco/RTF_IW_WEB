@@ -126,7 +126,9 @@ public class SolicitudWS {
 						SolicitudDTOWS solicitudDTOWS=new SolicitudDTOWS();
 						solicitudDTOWS.setId(solicitud.getId());
 						solicitudDTOWS.setEstadoSolicitud(solicitud.getEstadoSolicitud());
-						lista.add(solicitudDTOWS);
+						if(solicitud.getEstadoSolicitud()!=0){
+							lista.add(solicitudDTOWS);
+						}
 					}
 				}catch(DaoException e){
 					throw new RemoteException(e);
@@ -157,14 +159,16 @@ public class SolicitudWS {
 			SolicitudId id=new SolicitudId();
 			Usuario usuario=null;
 			Dispositivo dispositivo=null;
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			Date fechaInicio=null;
 			Date fechaFin=null;
 			SolicitudDTOWS solicitudDTOWS=null;
 			try{
 				usuario=usuarioService.buscarUsuario(usuCorreo);
 				dispositivo=dispositivoService.buscarDispositivo(codigoDispositivo);
+				fechaInicioStr=fechaInicioStr.replace('T',' ');
 				fechaInicio=dateFormat.parse(fechaInicioStr);
+				fechaFinStr=fechaFinStr.replace('T',' ');
 				fechaFin=dateFormat.parse(fechaFinStr);
 				id.setUsuario(usuario);
 				id.setDispositivo(dispositivo);

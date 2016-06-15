@@ -1,19 +1,19 @@
 <div class="container">
-		<table class="highlight">
-	        <thead>
-	          <tr>
-	              <th data-field="nombre">Dispositivo solicitado</th>
-	              <th data-field="inicio">Fecha inicio</th>
-	              <th data-field="fin">Fecha fin</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <tr ng-repeat="solicitud in solicitudes">
-	            <td>{{solicitud.id.dispositivo.nombre}}</td>
-	            <td>{{solicitud.id.fechaInicio}}</td>
-	            <td>{{solicitud.id.fechaFin}}</td>
-	            <td><button class="btn waves-effect waves-light" type="submit" ng-click="rechazarSolicitud(solicitud)">Rechazar</button></td>
-	          </tr>
-	        </tbody>
-    	</table>
-	</div>
+	<table class="highlight">
+        <thead>
+          <tr>
+              <th data-field="nombre">Dispositivo solicitado</th>
+              <th data-field="inicio">Fecha inicio</th>
+              <th data-field="fin">Fecha fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="solicitud in solicitudes">
+            <td>{{solicitud.id.dispositivo.nombre}}</td>
+            <td>{{solicitud.id.fechaInicio}}</td>
+            <td>{{solicitud.id.fechaFin}}</td>
+            <td><button class="btn waves-effect waves-light" type="submit" ng-click="rechazarSolicitud(solicitud)">Rechazar</button></td>
+          </tr>
+        </tbody>
+   	</table>
+</div>
