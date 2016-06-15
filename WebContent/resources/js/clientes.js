@@ -6,6 +6,7 @@ var URL_SERVICIO_LISTA = URL_SERVICIO+'rest/Cliente';
 var URL_SERVICIO_GUARDAR = URL_SERVICIO+'rest/Cliente';
 var servicioListaDispositivos ="http://localhost:8082/RTF_IW_Web/rest/dispositivo";
 var serviciocrearSolicitud= "http://localhost:8082/RTF_IW_Web/rest/solicitud/crearSolicitud";
+var servicioSolicitudUsuario= "http://localhost:8082/RTF_IW_Web/rest/solicitud/obtenerSolicitudesUsuario";
 var toType = function(obj) {
 	  return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
 	}
@@ -52,6 +53,11 @@ appClientes.service('solicitudService', function($http){
 			method: 'POST',
 			url:serviciocrearSolicitud+"/"+ usuario +"/"+solicitud.dispositivoSeleccionado.codigo
 			+ "/"+solicitud.fechaInicio.toString() + "/" +solicitud.fechaFin.toString() +"/"+solicitud.motivo});
+	}
+	this.obtenerSolicitudesUsuario = function(usuario){
+		return $http ({
+			method: 'GET',
+			url:serviciocrearSolicitud+"/"+ usuario});
 	}
 		
 });
@@ -147,6 +153,17 @@ appClientes.controller('crearClienteControlador',function($scope, $location, $co
 		
 	});
 	
+	solicitudService.obtenerSolicitudesUsuario($cookies.nombreUsuario).success(function(data){
+		$scope.solicitudes = data.solicitudDTOWS;
+		
+		if(toType($scope.dispositivos)=='array'){
+			
+		}else if(toType($scope.dispositivos)=='object'){
+			
+		}
+		
+	});
+	
 	$scope.solicitud = {
 			dispositivoSeleccionado:'',
 			correo : '',
@@ -163,6 +180,8 @@ appClientes.controller('crearClienteControlador',function($scope, $location, $co
 			});
 
 		};
+		
+		
 
 	
 });

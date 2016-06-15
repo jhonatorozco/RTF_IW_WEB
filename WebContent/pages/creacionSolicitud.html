@@ -27,4 +27,19 @@
 		<input type="submit" value="Guardar"/>
 		
 	</form>
+	
+	<div>
+	<table border="1" width="100%">
+		<tr>
+			<th height="20%">Dispositivo solicitado</th>
+			<th height="35%">Fecha Inicio</th>
+			<th height="35%">Fecha Fin</th>
+		</tr>
+		<tr ng-repeat="s in solicitudes">
+			<td>{{s.id.dispositivo.nombre}}</td>
+			<td>{{s.id.fechaInicio}}</td>
+			<td>{{s.id.fechaFin}</td>
+		</tr>
+	</table>
+	</div>
 </div>
