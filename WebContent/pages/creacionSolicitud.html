@@ -32,6 +32,7 @@
 	              <th data-field="nombre">Dispositivo solicitado</th>
 	              <th data-field="inicio">Fecha inicio</th>
 	              <th data-field="fin">Fecha fin</th>
+	              <th data-field="estado">Estado</th>
 	          </tr>
 	        </thead>
 	        <tbody>
@@ -39,6 +40,7 @@
 	            <td>{{solicitud.id.dispositivo.nombre}}</td>
 	            <td>{{solicitud.id.fechaInicio}}</td>
 	            <td>{{solicitud.id.fechaFin}}</td>
+	            <td>{{convertirEstado($index)}}</td>
 	          </tr>
 	        </tbody>
     	</table>

@@ -45,6 +45,19 @@ appClientes.controller('solicitudControlador',function($scope, $location,$route,
 		}
 
 	});
+	
+	$scope.convertirEstado = function(index){
+		var estado = $scope.solicitudes[index].estadoSolicitud;
+		switch (estado){
+			case '0': 
+				estado = "Rechazado";
+				break;
+			case '1': 
+				estado = "Aprobado";
+				break;
+		}
+		return estado;
+	}
 		
 });
 
