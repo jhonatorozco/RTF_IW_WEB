@@ -11,8 +11,9 @@ appClientes.controller('solicitudControlador',function($scope, $location,$route,
 		$scope.dispositivos = data.dispositivo;
 
 		if (toType($scope.dispositivos) == 'array') {
+			$scope.dispositivos = data.dispositivo;
 		} else if (toType($scope.dispositivos) == 'object') {
-
+			$scope.dispositivos = [data.dispositivo];
 		}
 
 	});
@@ -85,7 +86,7 @@ appClientes.controller('solicitudControladorAdmin',function($scope, $location, $
 	$scope.rechazarSolicitud = function(solicitud){
 		solicitudService.rechazarSolicitud($cookies.nombreUsuario, solicitud).success(function(data){
 			console.log("La solicitud fue modificada");
-			
+			$route.reload();
 		});
 	}
 });
