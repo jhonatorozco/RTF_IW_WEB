@@ -1,14 +1,34 @@
+<div>
+	<!-- Dropdown Structure -->
+	<ul id="dropdown1" class="dropdown-content">
+	  <li class="divider"></li>
+	  <li><a href="#!">Cerrar sesión</a></li>
+	</ul>
+	<nav>
+	  <div class="nav-wrapper teal darken-4">
+	    <a class='dropdown-button right' href="#" data-activates='dropdown1' data-beloworigin="true"><i class="large material-icons">settings</i></a>
+	    <ul class="hide-on-small-and-down">
+	      <li><a href="#" class="brand-logo">SISTEMA DE PRESTAMOS</a></li>
+	    </ul>
+	  </div>
+	</nav>
+</div>
 <div class="container">
+	<h3>Solicitudes</h3>
 	<table class="highlight">
         <thead>
           <tr>
-              <th data-field="nombre">Dispositivo solicitado</th>
-              <th data-field="inicio">Fecha inicio</th>
-              <th data-field="fin">Fecha fin</th>
+          	<th data-field="nombre">Nombre del usuario</th>
+          	<th data-field="nombre">Correo del usuario</th>
+            <th data-field="nombre">Dispositivo solicitado</th>
+            <th data-field="inicio">Inicio del prestamo</th>
+            <th data-field="fin">Fin del prestamo</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="solicitud in solicitudes">
+          	<td>{{solicitud.id.usuario.nombre}} {{solicitud.id.usuario.apellido}}</td>
+          	<td>{{solicitud.id.usuario.correo}}</td>
             <td>{{solicitud.id.dispositivo.nombre}}</td>
             <td>{{solicitud.id.fechaInicio}}</td>
             <td>{{solicitud.id.fechaFin}}</td>
