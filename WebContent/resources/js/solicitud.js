@@ -76,14 +76,6 @@ appClientes.service('dispositivoService', function($http){
 		
 });
 
-appClientes.service('usuarioService', function($http){
-	this.listaDispositivos = function(){
-		return $http ({
-			method: 'GET',
-			url:servicioObtenerUsuario+$cookies.nombreUsuario});
-	}
-		
-});
 
 appClientes.controller('solicitudControladorAdmin',function($scope, $location, $cookies,dispositivoService,solicitudService, auth){
 

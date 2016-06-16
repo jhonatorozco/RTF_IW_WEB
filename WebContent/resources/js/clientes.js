@@ -14,12 +14,16 @@ var toType = function(obj) {
 appClientes.factory('auth', function($cookies, $location,$cookieStore) {
 	return {
 
-		login : function(usuario) {
+		login : function(usuario,rol) {
+			var enlace = '/creacionSolicitud';
+			if(rol!=3){
+				enlace = '/administrar';
+			}
 			// creamos la cookie con el nombre que nos han pasado
-			console.log('Creando cookie');
+			console.log('Creando cookie'+rol);
 			$cookies.nombreUsuario = usuario,
 			// mandamos a la lista de clientes
-			$location.url('/administrar'); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			$location.url(enlace); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 													// Redireccionar despues de
 													// loguearse
 		},
@@ -57,6 +61,12 @@ appClientes.service('Usuarios', function($http) {
 					+ contrasena,
 		});
 	};
+	
+	this.obtenerUsuario = function(usuario){
+		return $http ({
+			method: 'GET',
+			url:servicioObtenerUsuario+usuario});
+	}
 
 });
 
@@ -150,10 +160,19 @@ appClientes.controller('contLogin',function($scope, auth, Usuarios) {
 												$scope.pws = '';
 												return;
 											} else if (data == 'el cliente se autentico de forma exitosa') {
+												var rol = 0;
+												Usuarios
+													.obtenerUsuario($scope.nombreUsuario)
+														.success(function(response){
+															rol = response.rol.id;
+															auth.login($scope.nombreUsuario,response.rol.id);
+													console.log();
+												});
 												alert(data);
-												auth.login($scope.nombreUsuario);
 											}
 										});
+						
+						
 					};
 
 				});
