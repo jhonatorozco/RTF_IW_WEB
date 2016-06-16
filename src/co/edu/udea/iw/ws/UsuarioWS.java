@@ -25,7 +25,7 @@ import co.edu.udea.iw.service.UsuarioService;
 //a que ruta funciona el servicio web
 /**
  * Servicios Web que proveen los metodos de la logica de negocio de usuario
- * @author Santiago Gómez santiago.gomezg@udea.edu.co
+ * @author Santiago Gï¿½mez santiago.gomezg@udea.edu.co
  * @category WS
  * @version 1
  */
@@ -37,7 +37,7 @@ public class UsuarioWS {
 	UsuarioService usuarioService;
 	/**
 	 * Servicio web para autenticar un usuario
-	 * Retorna un Boolean que confirma si el usuario se autenticó de forma correcta
+	 * Retorna un Boolean que confirma si el usuario se autenticï¿½ de forma correcta
 	 * @param correo
 	 * @param contrasena
 	 * @return
@@ -63,7 +63,7 @@ public class UsuarioWS {
 	}
 	/**
 	 * Servicio web para buscar un usuario
-	 * Retorna un String en formato Json que retorna la cédula y el nombre del usuario
+	 * Retorna un String en formato Json que retorna la cï¿½dula y el nombre del usuario
 	 * en caso de que lo encuentre y retorna un mensaje de error en caso de que no
 	 * @param correo
 	 * @return
@@ -83,6 +83,7 @@ public class UsuarioWS {
 					usuarioDtoWs.setCedula(usuario.getCedula());
 					usuarioDtoWs.setNombre(usuario.getNombre());
 					usuarioDtoWs.setApellido(usuario.getApellido());
+					usuarioDtoWs.setRol(usuario.getRol());
 					
 				} catch (DaoException | ServiceException e) {
 					throw new RemoteException(e);
@@ -91,7 +92,7 @@ public class UsuarioWS {
 	}
 	/**
 	 * Servicio Web para registrar un usuario
-	 * Retorna un String que informa si el registro se realizó de forma correcta o tuvo algún problema 
+	 * Retorna un String que informa si el registro se realizï¿½ de forma correcta o tuvo algï¿½n problema 
 	 * @param correo
 	 * @param cedula
 	 * @param nombre
@@ -122,7 +123,7 @@ public class UsuarioWS {
 	}
 	/**
 	 * Servico Web para modificar un usuario
-	 * Retorna un String que informa si la modificación se realizó de forma correcta o tuvo algún problema
+	 * Retorna un String que informa si la modificaciï¿½n se realizï¿½ de forma correcta o tuvo algï¿½n problema
 	 * @param correo
 	 * @param cedula
 	 * @param nombre
@@ -153,7 +154,7 @@ public class UsuarioWS {
 	}
 	/**
 	 * Servico Web para eliminar un usuario
-	 * Retorna un String que informa si la eliminación se realizó de forma correcta o tuvo algún problema
+	 * Retorna un String que informa si la eliminaciï¿½n se realizï¿½ de forma correcta o tuvo algï¿½n problema
 	 * @param correo
 	 * @param cedula
 	 * @param nombre

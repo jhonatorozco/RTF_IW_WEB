@@ -5,7 +5,8 @@ var servicioSolicitudUsuario= URL_SERVICIO + "rest/solicitud/obtenerSolicitudesU
 var servicioObtenerSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitudesUsuario/";
 var servicioObtenerTodasSolicitudes = URL_SERVICIO + "rest/solicitud/obtenerSolicitud";
 var servicioRechazarSolicitud = URL_SERVICIO + "rest/solicitud/actualizarEstadoSolicitud/";
-appClientes.controller('solicitudControlador',function($scope, $location,$route, $cookies,dispositivoService,solicitudService){
+var servicioObtenerUsuario = URL_SERVICIO + "rest/usuario/buscarUsuario/";
+appClientes.controller('solicitudControlador',function($scope, $location,$route, $cookies,dispositivoService,solicitudService,auth){
 	dispositivoService.listaDispositivos().success(function(data){
 
 		$scope.dispositivos = data.dispositivo;
@@ -35,6 +36,10 @@ appClientes.controller('solicitudControlador',function($scope, $location,$route,
 					alert(data);
 			
 		});
+	};
+	
+	$scope.logout = function(){
+		auth.logout();
 	};
 	
 	solicitudService.getAllSolicitudesUsuario($cookies.nombreUsuario).success(function (data) {
@@ -71,7 +76,16 @@ appClientes.service('dispositivoService', function($http){
 		
 });
 
-appClientes.controller('solicitudControladorAdmin',function($scope, $location, $cookies,dispositivoService,solicitudService){
+appClientes.service('usuarioService', function($http){
+	this.listaDispositivos = function(){
+		return $http ({
+			method: 'GET',
+			url:servicioObtenerUsuario+$cookies.nombreUsuario});
+	}
+		
+});
+
+appClientes.controller('solicitudControladorAdmin',function($scope, $location, $cookies,dispositivoService,solicitudService, auth){
 
 	solicitudService.getAllSolicitudes($cookies.nombreUsuario).success(function (data) {
 		if (toType(data.solicitudDTOWS) == 'array') {
@@ -89,6 +103,10 @@ appClientes.controller('solicitudControladorAdmin',function($scope, $location, $
 			$route.reload();
 		});
 	}
+	
+	$scope.logout = function(){
+		auth.logout();
+	};
 });
 
 appClientes.service('solicitudService', function($http){

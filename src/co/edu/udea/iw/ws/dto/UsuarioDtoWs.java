@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import co.edu.udea.iw.dto.Rol;
 /**
  * Clase dto auxiliar para mostrar los datos de un Usuario en el Web Service.
- * @author Santiago Gómez Giraldo
+ * @author Santiago Gï¿½mez Giraldo
  * @version 1
  * @category DTO
  */
@@ -27,6 +27,8 @@ public class UsuarioDtoWs {
 		 * Apedllido del usuario
 		 */
 		private String apellido;
+		
+		private Rol rol;
 	
 		
 		/**
@@ -56,6 +58,19 @@ public class UsuarioDtoWs {
 		public void setApellido(String apellido) {
 			this.apellido = apellido;
 		}
+		/**
+		 * @return the rol
+		 */
+		public Rol getRol() {
+			return rol;
+		}
+		/**
+		 * @param rol the rol to set
+		 */
+		public void setRol(Rol rol) {
+			this.rol = rol;
+		}
 
+		
 
 }

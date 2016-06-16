@@ -11,7 +11,7 @@ var toType = function(obj) {
 	return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
 };
 
-appClientes.factory('auth', function($cookies, $location) {
+appClientes.factory('auth', function($cookies, $location,$cookieStore) {
 	return {
 
 		login : function(usuario) {
@@ -19,9 +19,15 @@ appClientes.factory('auth', function($cookies, $location) {
 			console.log('Creando cookie');
 			$cookies.nombreUsuario = usuario,
 			// mandamos a la lista de clientes
-			$location.url('/creacionSolicitud'); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			$location.url('/administrar'); // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 													// Redireccionar despues de
 													// loguearse
+		},
+		
+		logout : function(){
+			console.log('Eliminando cookie');
+			$cookieStore.remove("nombreUsuario"); //Cerrar sesion (Se necesita el $cookieStore) 
+			$location.url('/');
 		},
 
 		validarEstado : function() {

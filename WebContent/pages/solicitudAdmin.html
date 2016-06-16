@@ -6,9 +6,9 @@
 	</ul>
 	<nav>
 	  <div class="nav-wrapper teal darken-4">
-	    <a class='dropdown-button right' href="#" data-activates='dropdown1' data-beloworigin="true"><i class="large material-icons">settings</i></a>
-	    <ul class="hide-on-small-and-down">
-	      <li><a href="#" class="brand-logo">SISTEMA DE PRESTAMOS</a></li>
+	    <a href="#" class="brand-logo left">SISTEMA DE PRESTAMOS</a>
+	    <ul class="right hide-on-small-and-down">
+	      <li ng-click="logout()"><a href="#"><i class="material-icons right">settings</i>Cerrar sesión</a></li>
 	    </ul>
 	  </div>
 	</nav>
@@ -19,8 +19,8 @@
         <thead>
           <tr>
           	<th data-field="nombre">Nombre del usuario</th>
-          	<th data-field="nombre">Correo del usuario</th>
-            <th data-field="nombre">Dispositivo solicitado</th>
+          	<th data-field="correo">Correo del usuario</th>
+            <th data-field="dispositivo">Dispositivo solicitado</th>
             <th data-field="inicio">Inicio del prestamo</th>
             <th data-field="fin">Fin del prestamo</th>
           </tr>
